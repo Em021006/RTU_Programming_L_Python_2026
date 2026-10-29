@@ -30,14 +30,21 @@ Examples (these are also used to check your work):
 """
 
 
-def analyze_sentence(text: str) -> tuple[int, int, bool]:
-    """Return (length, word count, contains 'python') for the given text."""
-    # TODO: implement function logic
+def analyze_sentence(text : str) -> tuple[int, int, bool] :
+    char_number = len(sentence)   # on compte le nombre de caractère y compris espaces
+    word_count = len(sentence.split())  # split découpe la chaine de caractère en morceaux
+    # cette fonction renvoie une liste, donc ensuite on compte la longueur de la liste
+
+    contains_python = "python" in sentence   # if we find 'python' in the sentence = true
+    return (char_number, word_count, contains_python)
+
     raise NotImplementedError("analyze_sentence() is not implemented yet")
 
-
 if __name__ == "__main__":
-    # Keep all input() calls inside this block, otherwise the autograder
-    # cannot import your file.
-    # TODO: read sentence from input, call function, and print results
+    sentence = input("entrer une phrase : ")
+    char_number, word_count, contains_python = analyze_sentence(sentence)
+    print(f"Characters : {char_number}")
+    print(f"Words : {word_count}")
+    print(f"Contains 'Python': {contains_python}")
+
     pass

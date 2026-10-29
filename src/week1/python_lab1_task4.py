@@ -57,30 +57,60 @@ Examples (these are also used to check your work):
 
 def count_characters(text: str) -> int:
     """Count characters that are not whitespace."""
-    # TODO: implement
+    return sum(1 for c in text if not c.isspace())
     raise NotImplementedError("count_characters() is not implemented yet")
 
 
 def count_words(text: str) -> int:
     """Count number of whitespace-separated words."""
-    # TODO: implement
+    return len(text.split())
     raise NotImplementedError("count_words() is not implemented yet")
 
 
 def extract_numbers(text: str) -> list[int]:
     """Return a list of the integers found in text, in order."""
-    # TODO: implement
+    numbers = []
+    for i in text.split():
+        clean = i.rstrip(".,!?;:")
+
+        if clean.startswith("-"):
+            digits = clean[1:]
+        else:
+            digits = clean
+
+        if digits.isdigit():
+            numbers.append(int(clean))
+    return numbers
     raise NotImplementedError("extract_numbers() is not implemented yet")
 
 
 def analyze_text(text: str) -> dict:
     """Return a dict with characters, words, numbers, sum and average."""
-    # TODO: call the helper functions and compute sum and average
+    numbers = extract_numbers(text)
+    total = sum(numbers)
+    average = total / len(numbers) if numbers else 0.0
+    return {
+        "characters": count_characters(text),
+        "words": count_words(text),
+        "numbers": numbers,
+        "sum": total,
+        "average": average,
+    }
     raise NotImplementedError("analyze_text() is not implemented yet")
 
 
 if __name__ == "__main__":
+
     # Keep all input() calls inside this block, otherwise the autograder
     # cannot import your file.
     # TODO: read input, call analyze_text(), and print results
+
+    text = input("entrer un texte : ")
+    result = analyze_text(text)
+    print(f"characters (no spaces): {result['characters']}")
+    print(f"words: {result['words']}")
+    print(f"numbers: {result['numbers']}")
+    print(f"sum: {result['sum']}")
+    print(f"average: {result['average']:.2f}")
+
     pass
